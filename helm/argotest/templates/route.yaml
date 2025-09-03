@@ -1,0 +1,21 @@
+# route.yaml
+# This defines an OpenShift Route that exposes your status-app-service externally.
+# It will create a public URL for your application.
+
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: argotest-route
+  labels:
+    app: argotest
+spec:
+  to:
+    kind: Service
+    name: argotest-service # This targets the Service defined above
+    weight: 100
+  port:
+    targetPort: 80 # This matches the port defined on the Service
+  tls:
+    termination: edge # Recommended for most web applications
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

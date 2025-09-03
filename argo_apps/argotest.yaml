@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argotest
+spec:
+  destination:
+    namespace: k8sgpt-operator-system
+    server: https://kubernetes.default.svc
+  source:
+    path: helm/argotest
+    repoURL: https://gitlab.cee.redhat.com/sfiresht/argotest.git
+    targetRevision: HEAD
+  sources: []
+  project: argotest
+  syncPolicy:
+    automated: {}
